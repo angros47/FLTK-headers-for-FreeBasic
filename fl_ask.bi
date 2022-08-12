@@ -17,7 +17,7 @@ declare sub fl_message(char as const zstring ptr,...)
 declare sub fl_alert(char as const zstring ptr,...)
 
 declare function fl_ask(char as const zstring ptr,...) as long
-declare function fl_choice(q as const zstring ptr, b0 as const zstring ptr, b1 as const zstring ptr, b2  as const zstring ptr,...) as long
+declare function fl_choice_ alias "fl_choice" (q as const zstring ptr, b0 as const zstring ptr, b1 as const zstring ptr, b2  as const zstring ptr,...) as long
 declare function _fl_input alias "fl_input" (label as const zstring ptr, deflt as const zstring ptr= 0, ...) as const zstring ptr
 declare function fl_password(label as const zstring ptr, deflt as const zstring ptr= 0, ...) as const zstring ptr
 
