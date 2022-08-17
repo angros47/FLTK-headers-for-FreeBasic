@@ -128,6 +128,10 @@ private function Fl_Group.clip_children() as long
 	return (this.flags_ and 2048) <>0
 end function
 
+private function Fl_Group.as_group() as Fl_Group_ ptr
+	return @this
+end function
+
 private constructor Fl_End
 	Fl_Group.current()->end_()
 end constructor
