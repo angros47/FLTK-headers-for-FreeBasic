@@ -222,3 +222,13 @@ private function Fl_Window.as_window() as Fl_Window_ ptr
 	return @this
 end function
 
+
+
+
+
+
+
+
+private sub Fl.grab(byref win as Fl_Window_)	'moved to 
+	grab(@win)
+end sub
