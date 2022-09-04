@@ -10,9 +10,11 @@
 
 #inclib "fltk"
 
-#inclib "X11"
-#inclib "Xrender"
-#inclib "Xext"
+#ifndef __FB_WIN32__
+	#inclib "X11"
+	#inclib "Xrender"
+	#inclib "Xext"
+#endif
 
 #define FL_SOCKET long
 
