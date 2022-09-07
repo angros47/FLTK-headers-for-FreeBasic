@@ -28,6 +28,10 @@ private sub Fl_Cairo_Window.draw()
 	if (draw_cb_) then draw_cb_(@this, Fl.cairo_cc())
 end sub
 
+private constructor Fl_Cairo_Window(w as long, h as long)
+	base(w,h)
+end constructor
+
 private sub Fl_Cairo_Window.set_draw_cb(cb as cairo_draw_cb)
 	draw_cb_=cb
 end sub
