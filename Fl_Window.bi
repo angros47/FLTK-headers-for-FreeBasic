@@ -8,33 +8,46 @@ extern "c++"
 type Fl_Image_ as Fl_Image
 type Fl_RGB_Image_ as Fl_RGB_Image
 type Fl_Window_ as Fl_Window
+type icon_data_ 
+	legacy_icon as const any ptr
+	icons as Fl_RGB_Image_ ptr ptr
+	count as long
+#ifdef __FB_WIN32__
+	big_icon as any ptr
+	small_icon as any ptr
+#endif
+end type
+type shape_data_type 
+	lw_ as long
+	lh_ as long
+	shape_ as Fl_Image_ ptr
+#ifdef __FB_APPLE__
+	mask as CGImageRef
+#endif
+	todelete_ as any ptr	'Fl_Bitmap_ ptr
+end type
 
-type Fl_Window  extends Fl_Group 
+
+type Fl_Window  extends Fl_Group field=4
+private:
 	static default_xclass_ as zstring ptr
-''#if FLTK_ABI_VERSION >= 10301
-	no_fullscreen_x as long
-	no_fullscreen_y as long
-	no_fullscreen_w as long
-	no_fullscreen_h as long
-	fullscreen_screen_top as long
-	fullscreen_screen_bottom as long
-	fullscreen_screen_left as long
-	fullscreen_screen_right as long
-''#endif
+'#if FLTK_ABI_VERSION >= 10301
+	static no_fullscreen_x as long
+	static no_fullscreen_y as long
+	static no_fullscreen_w as long
+	static no_fullscreen_h as long
+	static fullscreen_screen_top as long
+	static fullscreen_screen_bottom as long
+	static fullscreen_screen_left as long
+	static fullscreen_screen_right as long
+'#endif
 
-
-
-	declare constructor (byref w as const Fl_Window)
-	declare operator let (byref w as const Fl_Window)
-
-	declare virtual sub draw()
-	declare virtual sub flush()
 
 	i as any ptr 'Fl_X
 
-	iconlabel_ as zstring ptr
+	iconlabel_ as const zstring ptr
 	xclass_ as zstring ptr
-	icon_ as Fl_RGB_Image_ ptr ptr 	'icon_data
+	icon_ as icon_data_ ptr
 	as long minw, minh, maxw, maxh
 	as long dw, dh, aspect
 	size_range_set as ubyte
@@ -43,11 +56,39 @@ type Fl_Window  extends Fl_Group
 
 	cursor_default as long
 
-	shape_data_ as any ptr
+	as Fl_Color cursor_fg, cursor_bg
 
-	declare sub shape(img as Fl_Image_ ptr)
+protected:
+	static shape_data_ as shape_data_type ptr
+private:
+	declare sub shape_bitmap_(b as Fl_Image_ ptr)
+	declare sub shape_alpha_(img as Fl_Image_ ptr, offset as long)
+	declare sub shape_pixmap_(pixmap as Fl_Image_ ptr)
+public:
+	declare sub shape(img as const Fl_Image_ ptr)
+	declare sub shape(byref img as const Fl_Image_)
+
+#ifndef __FB_WIN32__
+	declare sub combine_mask()
+#endif
 private:
 	declare sub size_range_ ()
+	declare constructor ()
+	declare sub fullscreen()
+	declare sub fullscreen_off(x as long, y as long, w as long, h as long)
+
+
+	declare constructor (byref w as const Fl_Window)
+	declare operator let (byref w as const Fl_Window)
+
+protected:
+	static current_ as Fl_Window ptr
+	declare virtual sub draw()
+	declare virtual sub flush()
+
+	declare sub force_position(force as long)
+	declare function force_position() as long
+	declare sub free_icons()
 public:
 
 	declare constructor(w as long, h as long, title as const zstring ptr)
@@ -104,8 +145,6 @@ public:
  	declare sub show(argc as long, argv as zstring ptr ptr)
 	declare sub wait_for_expose()
 
-	declare sub fullscreen()
-	declare sub fullscreen_off(x as long, y as long, w as long, h as long)
 	declare function fullscreen_active() as unsigned long
 	declare sub fullscreen_screens(x as long, y as long, w as long, h as long)
 
@@ -130,6 +169,22 @@ public:
 
 end type
 end extern
+
+'private sub Fl_Window.shape(byref img as const Fl_Image_)
+'	shape(@img)
+'end sub
+
+private sub Fl_Window.force_position(force as long)
+	if force then
+		set_flag(FORCE_POSITION)
+	else
+		clear_flag(FORCE_POSITION)
+	end if
+end sub
+
+private function Fl_Window.force_position() as long
+	return iif(flags() and FORCE_POSITION,1,0)
+end function
 
 private sub Fl_Window.clear_border() 
 	flags_ = flags_ or 1 shl 3
