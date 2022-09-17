@@ -14,6 +14,8 @@
 #include once "fl_ask.bi"
 
 extern "c++"
+type Fl_Preferences_ as Fl_Preferences
+
 type Fl_File_Chooser
 public:
 	enum
@@ -23,7 +25,7 @@ public:
 		DIRECTORY = 4
 	end enum
 private:
-	static prefs as any ptr 'Fl_Preferences ptr
+	static prefs as Fl_Preferences_ ptr
 	callback_ as sub(as Fl_File_Chooser ptr, as any ptr)
 	data_ as any ptr
 	directory_ as zstring*FL_PATH_MAX
