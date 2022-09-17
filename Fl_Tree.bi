@@ -15,7 +15,7 @@ enum Fl_Tree_Reason
 	FL_TREE_REASON_DRAGGED	
 end enum
 
-type Fl_Preferences as Fl_Preferences_
+type Fl_Preferences_ as Fl_Preferences
 
 extern "c++"
 
@@ -181,7 +181,7 @@ public:
 	declare sub callback_reason(reason as Fl_Tree_Reason)
 	declare const function callback_reason() as Fl_Tree_Reason
 
-	declare sub load(byref p as Fl_Preferences)
+	declare sub load(byref p as Fl_Preferences_)
 end type
 
 end extern
