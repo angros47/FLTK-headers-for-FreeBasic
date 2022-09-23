@@ -4,6 +4,15 @@
 
 #include once "Enumerations.bi"
 
+
+#ifdef __FB_DOS__
+	#inclib "NX11"
+	#inclib "freetype"
+	#inclib "nano-X"
+	#inclib "mwin"
+	#inclib "stdcxx"
+	#inclib "fltk"
+#else
 'FLTK is written in C++, so we need to include C++ runtime as well
 #inclib "stdc++"
 
@@ -14,6 +23,7 @@
 	#inclib "X11"
 	#inclib "Xrender"
 	#inclib "Xext"
+#endif
 #endif
 
 #define FL_SOCKET long
