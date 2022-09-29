@@ -74,8 +74,8 @@ public:
 private:
 	declare sub size_range_ ()
 	declare constructor ()
-	declare sub fullscreen()
-	declare sub fullscreen_off(x as long, y as long, w as long, h as long)
+	declare sub fullscreen_x()
+	declare sub fullscreen_off_x(x as long, y as long, w as long, h as long)
 
 
 	declare constructor (byref w as const Fl_Window)
@@ -145,6 +145,9 @@ public:
  	declare sub show(argc as long, argv as zstring ptr ptr)
 	declare sub wait_for_expose()
 
+	declare sub fullscreen()
+	declare sub fullscreen_off()
+	declare sub fullscreen_off(x as long, y as long, w as long, h as long)
 	declare function fullscreen_active() as unsigned long
 	declare sub fullscreen_screens(x as long, y as long, w as long, h as long)
 
