@@ -73,7 +73,7 @@ public:
 #endif
 private:
 	declare sub size_range_ ()
-	declare constructor ()
+	declare sub _Fl_Window()
 	declare sub fullscreen_x()
 	declare sub fullscreen_off_x(x as long, y as long, w as long, h as long)
 
