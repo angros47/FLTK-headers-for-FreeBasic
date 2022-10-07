@@ -54,7 +54,7 @@ public:
 	declare virtual function handle(h as long) as long
 	declare constructor(x as long, y as long, w as long, h as long, title as const zstring ptr=0)
 	declare constructor(t as uinteger, x as long, y as long, w as long, h as long, title as const zstring ptr)
-	declare virtual destructor
+	declare destructor
 end type
 end extern
 
