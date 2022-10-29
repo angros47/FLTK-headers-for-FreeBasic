@@ -133,8 +133,9 @@ public:
 	declare sub flush()
 
 
-private: 
+protected:
 	declare constructor()
+private: 
 	declare operator @ as Fl_Preferences ptr
 
 	static nameBuffer(127) as byte
