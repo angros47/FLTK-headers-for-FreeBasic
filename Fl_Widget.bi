@@ -95,10 +95,10 @@ protected:
 	declare const sub draw_label(x as long, y as long, w as long, h as long) 
 
 
-	declare virtual destructor
-	declare abstract sub draw()
 public:
 
+	declare virtual destructor
+	declare abstract sub draw()
 	declare virtual function handle(event as long) as long
 
 	declare const function is_label_copied() as long
