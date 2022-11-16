@@ -15,7 +15,9 @@ enum
 end enum
 
 extern "c++"
+#ifndef fl_old_shortcut
 declare function fl_old_shortcut(s as const zstring ptr) as unsigned long
+#endif
 
 type Fl_Menu__ as Fl_Menu_
 
