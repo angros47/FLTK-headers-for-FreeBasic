@@ -2,6 +2,7 @@
 
 
 extern "c++"
+type Fl_Menu_Item_ as Fl_Menu_Item
 
 type Fl_Pixmap extends Fl_Image
 private:
@@ -38,7 +39,7 @@ public:
 	declare virtual sub draw(X as long, Y as long, W as long, H as long, cx as long=0, cy as long=0)
 	declare sub  draw(X as long, Y as long)
 	declare virtual sub label(w as Fl_Widget ptr)
-	declare virtual sub label(m as Fl_Menu_Item ptr)
+	declare virtual sub label(m as Fl_Menu_Item_ ptr)
 	declare virtual sub uncache()
 
 end type
