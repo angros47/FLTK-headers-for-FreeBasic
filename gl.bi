@@ -1,5 +1,6 @@
 #include once "Enumerations.bi"
 #include once "GL/gl.bi"
+#inclib "fltk_gl"
 
 extern "c++"
 declare sub gl_start()
