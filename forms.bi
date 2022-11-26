@@ -763,10 +763,10 @@ private function fl_add_labelframe(i as Fl_Boxtype, x as long, y as long, w as l
 	return o
 end function
 
-'#include once "Fl_Free.bi"
-'declare function fl_add_free(t as long, x as double, y as double, w as double, h as double, l as const zstring ptr, hdl as FL_HANDLEPTR) as Fl_Free ptr
-'	return cast(Fl_Free ptr, (fl_add_new(new Fl_Free(t,cast(long, x),cast(long, y), cast(long, w), cast(long, h),l,hdl)))
-'end function
+#include once "Fl_Free.bi"
+declare function fl_add_free(t as long, x as double, y as double, w as double, h as double, l as const zstring ptr, hdl as FL_HANDLEPTR) as Fl_Free ptr
+	return cast(Fl_Free ptr, (fl_add_new(new Fl_Free(t,cast(long, x),cast(long, y), cast(long, w), cast(long, h),l,hdl)))
+end function
 
 #include once "fl_ask.bi"
 #include once "fl_show_colormap.bi"
