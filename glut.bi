@@ -1,4 +1,4 @@
-#include once "GL/gl.bi"
+#include once "gl.bi"
 #include once "Fl.bi"
 #include once "Fl_Gl_Window.bi"
 
