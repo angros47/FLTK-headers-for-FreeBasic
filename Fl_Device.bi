@@ -26,20 +26,21 @@ public:
 
 end type
 
-type matrix__ 
-	as double a, b, c, d, x, y
-end type
 
 type Fl_Graphics_Driver extends Fl_Device
+	type matrix
+		as double a, b, c, d, x, y
+	end type
+
 private:
-	static m0 as const matrix__
+	static m0 as const matrix
 	font_ as Fl_Font
 	size_ as Fl_Fontsize
 	color_ as Fl_Color 
 	sptr as long
 	static matrix_stack_size as const long' = FL_MATRIX_STACK_SIZE
-	stack(FL_MATRIX_STACK_SIZE - 1) as matrix__
-	m as matrix__
+	stack(FL_MATRIX_STACK_SIZE - 1) as matrix
+	m as matrix
 	as long n, p_size, gap_
 	p as any ptr 'XPOINT ptr
 	what as long
@@ -57,7 +58,7 @@ private:
 	declare sub fixloop()
 
 protected:
-	fl_matrix as matrix__ ptr
+	fl_matrix as matrix ptr
 	public:
 	declare constructor()
 	declare virtual sub rect(x as long, y as long, w as long, h as long)

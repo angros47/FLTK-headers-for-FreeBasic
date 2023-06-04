@@ -7,32 +7,24 @@
 
 
 extern "c++"
-type InputMenuButton_ extends Fl_Menu_Button
-protected:
-	declare constructor (byref b as const InputMenuButton_)
-	declare operator let (byref b as const InputMenuButton_)
-private:
-	declare sub draw()
-public:
-	declare constructor(X as long, Y as long, W as long, H as long, L as const zstring ptr=0)
-end type
-
-private sub InputMenuButton_.draw() 
-	draw_box(FL_UP_BOX, color())
-	fl_color(iif(active_r(), labelcolor() , fl_inactive(labelcolor())))
-	dim as long xc = x()+w()/2, yc=y()+h()/2
-	fl_polygon(xc-5,yc-3,xc+5,yc-3,xc,yc+3)
-	if Fl.focus() = @this then draw_focus()
-end sub
-
 
 type Fl_Input_Choice extends Fl_Group 
 private:
 	declare constructor (byref w as const Fl_Input_Choice)
 	declare operator let (byref w as const Fl_Input_Choice)
 
+	type InputMenuButton extends Fl_Menu_Button
+	protected:
+		declare constructor (byref b as const InputMenuButton)
+		declare operator let (byref b as const InputMenuButton)
+	private:
+		declare sub draw()
+	public:
+		declare constructor(X as long, Y as long, W as long, H as long, L as const zstring ptr=0)
+	end type
+
 	inp_ as Fl_Input ptr
-	menu_ as InputMenuButton_ ptr
+	menu_ as InputMenuButton ptr
 
 	declare static sub menu_cb(as Fl_Widget ptr, data_ as any ptr)
 	declare static sub inp_cb(as Fl_Widget ptr, data_ as any ptr)
@@ -122,6 +114,13 @@ private sub Fl_Input_Choice.inp_cb(a as Fl_Widget ptr, data_ as any ptr)
       o->Fl_Widget::clear_changed();
 end sub'/
 
+private sub Fl_Input_Choice.InputMenuButton.draw() 
+	draw_box(FL_UP_BOX, color())
+	fl_color(iif(active_r(), labelcolor() , fl_inactive(labelcolor())))
+	dim as long xc = x()+w()/2, yc=y()+h()/2
+	fl_polygon(xc-5,yc-3,xc+5,yc-3,xc,yc+3)
+	if Fl.focus() = @this then draw_focus()
+end sub
 
 private function Fl_Input_Choice.inp_x() as long
 	return(x() + Fl.box_dx(box()))

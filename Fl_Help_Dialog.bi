@@ -19,22 +19,22 @@ public:
 private:
 	window_ as Fl_Double_Window ptr
 	back_ as Fl_Button ptr
-	'inline void cb_back__i(Fl_Button*, void*);
+	declare sub cb_back__i(as Fl_Button ptr, as any ptr)
 	declare static sub cb_back_(as Fl_Button ptr, as any ptr)
 	forward_ as Fl_Button ptr
-	'inline void cb_forward__i(Fl_Button*, void*);
+	declare sub cb_forward__i(as Fl_Button ptr, as any ptr)
 	declare static sub cb_forward_(as Fl_Button ptr, as any ptr)
 	smaller_ as Fl_Button ptr
-	'inline void cb_smaller__i(Fl_Button*, void*);
+	declare sub cb_smaller__i(as Fl_Button ptr, as any ptr)
 	declare static sub cb_smaller_(as Fl_Button ptr, as any ptr)
 	larger_ as Fl_Button ptr
-	'inline void cb_larger__i(Fl_Button*, void*);
+	declare sub cb_larger__i(as Fl_Button ptr, as any ptr)
 	declare static sub cb_larger_(as Fl_Button ptr, as any ptr)
 	find_ as Fl_Input ptr
-	'inline void cb_find__i(Fl_Input*, void*);
+	declare sub cb_find__i(as Fl_Input ptr, as any ptr)
 	declare static sub cb_find_(as Fl_Input ptr, as any ptr)
 	view_ as Fl_Help_View ptr
-	'inline void cb_view__i(Fl_Help_View*, void*);
+	declare sub cb_view__i(as Fl_Help_View, as any ptr)
 	declare static sub cb_view_(as Fl_Help_View, as any ptr)
 
 public:

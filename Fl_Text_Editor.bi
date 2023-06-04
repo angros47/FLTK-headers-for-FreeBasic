@@ -2,20 +2,6 @@
 
 
 extern "c++"
-type __Fl_Text_Editor as Fl_Text_Editor
-namespace Fl_Text_Editor_
-
-
-type Key_Func as function(key as long, editor as __Fl_Text_Editor ptr) as long
-
-type Key_Binding 
-      key as long
-      state as long
-      function_ as Key_Func
-      next_ as Key_Binding ptr
-end type
-
-end namespace
 
 type Fl_Text_Editor extends Fl_Text_Display
 protected:
@@ -23,6 +9,15 @@ protected:
 	declare operator let (byref b as const Fl_Text_Editor)
 
 public:
+	type Key_Func as function(key as long, editor as Fl_Text_Editor ptr) as long
+
+	type Key_Binding 
+	      key as long
+	      state as long
+	      function_ as Key_Func
+	      next_ as Key_Binding ptr
+	end type
+
 	declare constructor(x as long, y as long, w as long, h as long, title as const zstring ptr=0)
 	declare destructor()
 	declare virtual function handle(as long) as long
@@ -65,10 +60,10 @@ protected:
 	declare sub maybe_do_callback()
 
 	insert_mode_ as long
-	key_bindings as Fl_Text_Editor_.Key_Binding ptr
+	key_bindings as Fl_Text_Editor.Key_Binding ptr
 
-	static global_key_bindings as Fl_Text_Editor_.Key_Binding ptr
-	default_key_function_ as Fl_Text_Editor_.Key_Func
+	static global_key_bindings as Fl_Text_Editor.Key_Binding ptr
+	default_key_function_ as Fl_Text_Editor.Key_Func
 end type
 
 end extern

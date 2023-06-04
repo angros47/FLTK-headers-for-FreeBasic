@@ -6,76 +6,6 @@
 
 
 extern "c++"
-type IntVector
-private:
-	arr as long ptr
-	_size as unsigned long
-	'declare sub init() 
-	declare sub copy(newarr as long ptr, newsize as unsigned long)
-public:
-	declare constructor
-	declare destructor
-	declare constructor (byref o as IntVector)
-	declare operator let (byref o as IntVector)
-	declare operator [] (x as long) as long
-	declare function size() as unsigned long
-	declare sub size(count as unsigned long)
-	declare function pop_back() as long
-	declare sub push_back(val_ as long)
-	declare function back() as long
-end type
-
-private sub IntVector.copy(newarr as long ptr, newsize as unsigned long)
-	size(newsize)
-	for i as integer=1 to newsize
-		arr[i]=newarr[i]
-	next
-end sub
-
-private constructor IntVector
-	arr=0:_size=0
-end constructor
-
-private destructor IntVector
-	if  arr<>0 then deallocate(arr): arr = 0
-end destructor
-
-private constructor IntVector (byref o as IntVector)
-	arr=0:_size=0
-	copy(o.arr, o._size)
-end constructor
-
-private operator IntVector.let (byref o as IntVector)
-	arr=0:_size=0
-	copy(o.arr, o._size)
-end operator
-
-private operator IntVector.[] (x as long) as long
-	return(arr[x])
-end operator
-
-private function IntVector.size() as unsigned long
-	return _size
-end function
-
-private sub IntVector.size(count as unsigned long)
-	if count <> _size then
-		arr = reallocate(arr, count * sizeof(long))
-		_size = count
-	end if
-end sub
-
-private function IntVector.pop_back() as long
-	dim as long tmp = arr[_size-1]: _size-=1: return(tmp)
-end function
-
-private sub IntVector.push_back(val_ as long)
-	dim as unsigned long x = _size: size(_size+1): arr[x] = val_
-end sub
-
-private function IntVector.back() as long
-	return(arr[_size-1])
-end function
 
 type Fl_Table extends Fl_Group 
 	enum TableContext
@@ -111,6 +41,25 @@ private:
   
 	auto_drag as long
 	_selecting as long
+
+	type IntVector
+	private:
+		arr as long ptr
+		_size as unsigned long
+		'declare sub init() 
+		declare sub copy(newarr as long ptr, newsize as unsigned long)
+	public:
+		declare constructor
+		declare destructor
+		declare constructor (byref o as IntVector)
+		declare operator let (byref o as IntVector)
+		declare operator [] (x as long) as long
+		declare function size() as unsigned long
+		declare sub size(count as unsigned long)
+		declare function pop_back() as long
+		declare sub push_back(val_ as long)
+		declare function back() as long
+	end type
 
 	_colwidths as IntVector
 	_rowheights as IntVector
@@ -529,3 +478,54 @@ private sub Fl_Table.do_callback(context as TableContext, row as long, col as lo
 	base.base.do_callback()
 end sub
 
+private sub Fl_Table.IntVector.copy(newarr as long ptr, newsize as unsigned long)
+	size(newsize)
+	for i as integer=1 to newsize
+		arr[i]=newarr[i]
+	next
+end sub
+
+private constructor Fl_Table.IntVector
+	arr=0:_size=0
+end constructor
+
+private destructor Fl_Table.IntVector
+	if  arr<>0 then deallocate(arr): arr = 0
+end destructor
+
+private constructor Fl_Table.IntVector (byref o as IntVector)
+	arr=0:_size=0
+	copy(o.arr, o._size)
+end constructor
+
+private operator Fl_Table.IntVector.let (byref o as IntVector)
+	arr=0:_size=0
+	copy(o.arr, o._size)
+end operator
+
+private operator Fl_Table.IntVector.[] (x as long) as long
+	return(arr[x])
+end operator
+
+private function Fl_Table.IntVector.size() as unsigned long
+	return _size
+end function
+
+private sub Fl_Table.IntVector.size(count as unsigned long)
+	if count <> _size then
+		arr = reallocate(arr, count * sizeof(long))
+		_size = count
+	end if
+end sub
+
+private function Fl_Table.IntVector.pop_back() as long
+	dim as long tmp = arr[_size-1]: _size-=1: return(tmp)
+end function
+
+private sub Fl_Table.IntVector.push_back(val_ as long)
+	dim as unsigned long x = _size: size(_size+1): arr[x] = val_
+end sub
+
+private function Fl_Table.IntVector.back() as long
+	return(arr[_size-1])
+end function

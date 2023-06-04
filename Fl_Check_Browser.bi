@@ -2,14 +2,6 @@
 #include once "Fl_Browser_.bi"
 
 extern "c++"
-type cb_item_
-	next_ as cb_item_ ptr
-	prev as cb_item_ ptr
-	checked as byte
-	selected as byte
-	text as zstring ptr
-end type
-
 type Fl_Check_Browser extends Fl_Browser_
 private:
 	declare const function item_first() as any ptr
@@ -20,6 +12,14 @@ private:
 	declare const sub item_draw(as any ptr, as long, as long, as long, as long)
 	declare sub item_select(as any ptr, as long)
 	declare const function item_selected(as any ptr) as long
+
+	type cb_item_
+		next_ as cb_item_ ptr
+		prev as cb_item_ ptr
+		checked as byte
+		selected as byte
+		text as zstring ptr
+	end type
 
 	first as cb_item_ ptr
 	last as cb_item_ ptr

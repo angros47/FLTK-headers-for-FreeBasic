@@ -367,7 +367,7 @@ declare function fl_draw_pixmap overload(cdata as const zstring const ptr const 
 declare function fl_measure_pixmap overload(data_ as zstring const ptr const ptr, byref w as long , byref h as long) as long
 declare function fl_measure_pixmap overload(cdata as const zstring const ptr const ptr, byref w as long , byref h as long) as long
 
-declare sub fl_scroll(X as long, Y as long, W as long, H as long, dx as long, dy as long, draw_area as sub(as any ptr, as long, as long, as long, as long), data_ as any ptr)
+declare sub fl_scroll_ alias "fl_scroll"(X as long, Y as long, W as long, H as long, dx as long, dy as long, draw_area as sub(as any ptr, as long, as long, as long, as long), data_ as any ptr)
 
 declare function  fl_shortcut_label overload(shortcut as unsigned long) as const zstring ptr
 declare function  fl_shortcut_label overload (shortcut as unsigned long, eom as const zstring ptr ptr)as const zstring ptr

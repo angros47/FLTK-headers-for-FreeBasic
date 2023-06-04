@@ -14,11 +14,37 @@ private:
 protected:
 	declare constructor (byref b as const Fl_Scroll)
 	declare operator let (byref b as const Fl_Scroll)
-/'
+
 private:
+	type ScrollInfo
+		type Fl_Region_XYWH
+			as long x,y,w,h
+		end type
+		type Fl_Region_LRTB
+			l as long
+			r as long
+			t as long
+			b as long
+		end type
+		type Fl_Scrollbar_Data
+			as long x,y,w,h
+			pos as long
+			size as long
+			first as long
+			total as long
+		end type
+		scrollsize as long
+		innerbox as Fl_Region_XYWH
+		innerchild as Fl_Region_XYWH
+		child as Fl_Region_LRTB
+		hneeded as long
+		vneeded as long
+		hscroll as Fl_Scrollbar_Data
+		vscroll as Fl_Scrollbar_Data
+	end type	  
 	declare sub recalc_scrollbars(byref si as ScrollInfo)
 protected:
-'/
+
 
 	declare sub bbox(byref as long, byref as long, byref as long, byref as long)
 	declare sub draw()

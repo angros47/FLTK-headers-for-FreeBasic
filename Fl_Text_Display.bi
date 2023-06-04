@@ -7,55 +7,52 @@
 
 extern "c++"
 
-namespace Fl_Text_Display_
-enum 
-	NORMAL_CURSOR
-	CARET_CURSOR
-	DIM_CURSOR
-	BLOCK_CURSOR
-	HEAVY_CURSOR
-	SIMPLE_CURSOR
-end enum
-
-enum
-	CURSOR_POS, 
-	CHARACTER_POS
-end enum
-
-enum
-	DRAG_NONE = -2
-	DRAG_START_DND = -1
-	DRAG_CHAR = 0 
-	DRAG_WORD = 1 
-	DRAG_LINE = 2
-end enum
-  
-enum
-	WRAP_NONE
-	WRAP_AT_COLUMN
-	WRAP_AT_PIXEL
-	WRAP_AT_BOUNDS
-end enum
-
-type Unfinished_Style_Cb as sub(as long, as any ptr)
-
-type Style_Table_Entry 
-	color as Fl_Color
-	font as Fl_Font
-	size as Fl_Fontsize
-	attr as unsigned long
-end type
-
-type text_area_
-	x as long
-	y as long
-	w as long
-	h as long
-end type
-
-end namespace
-
 type Fl_Text_Display extends Fl_Group 
+	enum 
+		NORMAL_CURSOR
+		CARET_CURSOR
+		DIM_CURSOR
+		BLOCK_CURSOR
+		HEAVY_CURSOR
+		SIMPLE_CURSOR
+	end enum
+
+	enum
+		CURSOR_POS, 
+		CHARACTER_POS
+	end enum
+
+	enum
+		DRAG_NONE = -2
+		DRAG_START_DND = -1
+		DRAG_CHAR = 0 
+		DRAG_WORD = 1 
+		DRAG_LINE = 2
+	end enum
+	  
+	enum
+		WRAP_NONE
+		WRAP_AT_COLUMN
+		WRAP_AT_PIXEL
+		WRAP_AT_BOUNDS
+	end enum
+
+	type Unfinished_Style_Cb as sub(as long, as any ptr)
+
+	type Style_Table_Entry 
+		color as Fl_Color
+		font as Fl_Font
+		size as Fl_Fontsize
+		attr as unsigned long
+	end type
+
+	type text_area_
+		x as long
+		y as long
+		w as long
+		h as long
+	end type
+
 protected:
 	declare constructor (byref b as const Fl_Text_Display)
 	declare operator let (byref b as const Fl_Text_Display)
@@ -112,9 +109,9 @@ public:
 	declare const function word_end(pos as long) as long
 
 	declare sub highlight_data(styleBuffer as Fl_Text_Buffer ptr, _
-				styleTable as const Fl_Text_Display_.Style_Table_Entry ptr, _
-				nStyles as long, unfinishedStyle as byte, _
-				unfinishedHighlightCB as Fl_Text_Display_.Unfinished_Style_Cb, _
+				styleTable as const Style_Table_Entry ptr, _
+				nStyles as long, unfinishedStyle as byte alias "char", _
+				unfinishedHighlightCB as Unfinished_Style_Cb, _
 				cbArg as any ptr)
 
 	declare const function position_style(lineStartPos as long, lineLen as long, lineIndex as long) as long
@@ -193,9 +190,9 @@ protected:
 	declare const function longest_vline() as long
 	declare const function empty_vlines() as long
 	declare const function vline_length(visLineNum as long) as long
-	declare const function xy_to_position(x as long, y as long, PosType as long = Fl_Text_Display_.CHARACTER_POS) as long
+	declare const function xy_to_position(x as long, y as long, PosType as long = CHARACTER_POS) as long
   
-	declare const sub xy_to_rowcol(x as long, y as long, row as long ptr, column as long ptr, PosType as long = Fl_Text_Display_.CHARACTER_POS)
+	declare const sub xy_to_rowcol(x as long, y as long, row as long ptr, column as long ptr, PosType as long = CHARACTER_POS)
 	declare sub maintain_absolute_top_line_number(state as long)
 	declare const function get_absolute_top_line_number() as long
 	declare sub absolute_top_line_number(oldFirstChar as long)
@@ -248,11 +245,11 @@ protected:
 
 	mHorizOffsetHint as long
 	mNStyles as long 
-	mStyleTable as const Fl_Text_Display_.Style_Table_Entry ptr
+	mStyleTable as const Style_Table_Entry ptr
 
 	mUnfinishedStyle as byte
 
-	mUnfinishedHighlightCB as Fl_Text_Display_.Unfinished_Style_Cb
+	mUnfinishedHighlightCB as Unfinished_Style_Cb
 
 	mHighlightCBArg as any ptr
   
@@ -274,7 +271,7 @@ protected:
 	scrollbar_align_ as Fl_Align
 	as long dragPos, dragType, dragging
 	display_insert_position_hint as long
-	text_area as Fl_Text_Display_.text_area_
+	text_area as text_area_
   
 	shortcut_ as long
   
@@ -342,18 +339,6 @@ end function
 private const function Fl_Text_Display.word_end(pos as long) as long
 	return buffer()->word_end(pos)
 end function
-
-extern "c"
-declare sub _ZN15Fl_Text_Display14highlight_dataEP14Fl_Text_BufferPKNS_17Style_Table_EntryEicPFviPvES5_(as Fl_Text_Display ptr, as any ptr, as const any ptr, as long, as byte, as any ptr, as any ptr)
-end extern
-
-private sub Fl_Text_Display.highlight_data(styleBuffer as Fl_Text_Buffer ptr, _
-				styleTable as const Fl_Text_Display_.Style_Table_Entry ptr, _
-				nStyles as long, unfinishedStyle as byte, _
-				unfinishedHighlightCB as Fl_Text_Display_.Unfinished_Style_Cb, _
-				cbArg as any ptr)
-	_ZN15Fl_Text_Display14highlight_dataEP14Fl_Text_BufferPKNS_17Style_Table_EntryEicPFviPvES5_ (@this, styleBuffer, styleTable, nStyles, unfinishedStyle, unfinishedHighlightCB, cbArg)
-end sub
 
 private const function Fl_Text_Display.shortcut() as long
 	return shortcut_
